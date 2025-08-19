@@ -7,21 +7,21 @@ public class Installment {
 
     DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private LocalDate localDate;
+    private LocalDate dueDate;
     private Double amount;
 
 
     public Installment(LocalDate localDate, Double amount) {
-        this.localDate = localDate;
+        this.dueDate = localDate;
         this.amount = amount;
     }
 
     public LocalDate getLocalDate() {
-        return localDate;
+        return dueDate;
     }
 
     public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+        this.dueDate = localDate;
     }
 
     public Double getAmount() {
@@ -34,6 +34,6 @@ public class Installment {
 
     @Override
     public String toString() {
-        return localDate.format(fmt) + " - " + String.format("%.2f", amount);
+        return dueDate.format(fmt) + " - " + String.format("%.2f", amount);
     }
 }

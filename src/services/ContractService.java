@@ -10,14 +10,14 @@ public class ContractService {
         this.paymentService = paymentService;
     }
 
-    public void processContract(Contract contract, int months) {
+    public void processContract(Contract contract, int totalInstallments) {
 
-        double value = contract.getContractValue() / months;
+        double baseValueOfInstallments = contract.getContractValue() / totalInstallments;
 
-        for (int i = 1; i <= months; i++) {
-            double amountI = paymentService.interest(value, i);
-            double amountF = paymentService.paymentFee(value + amountI);
-            double totalValue = value + amountI + amountF;
+        for (int i = 1; i <= totalInstallments; i++) {
+            double interestValue = paymentService.interest(baseValueOfInstallments, i);
+            double valueOfFees = paymentService.paymentFee(baseValueOfInstallments + interestValue);
+            double totalValue = baseValueOfInstallments + interestValue + valueOfFees;
             contract.getInstallments().add(new Installment(contract.getContractDate().plusMonths(i), totalValue));
 
         }
