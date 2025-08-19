@@ -1,4 +1,4 @@
-package Services;
+package services;
 
 import entities.Contract;
 import entities.Installment;

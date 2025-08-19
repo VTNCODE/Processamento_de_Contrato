@@ -1,8 +1,8 @@
 package application;
 
 
-import Services.ContractService;
-import Services.PaypalService;
+import services.ContractService;
+import services.PaypalService;
 import entities.Contract;
 import entities.Installment;
 
