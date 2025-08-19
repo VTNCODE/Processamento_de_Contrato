@@ -27,13 +27,13 @@ public class Program {
         double contractValue = sc.nextDouble();
         Contract contract = new Contract(number, contractDate, contractValue);
         System.out.print("Entre com o número de parcelas: ");
-        int parcelas = sc.nextInt();
+        int installments = sc.nextInt();
         System.out.println();
 
-        System.out.println("PARCELAS: ");
+        System.out.println("Parcelas: ");
 
         ContractService service = new ContractService(new PaypalService());
-        service.processContract(contract, parcelas);
+        service.processContract(contract, installments);
 
         for (Installment i : contract.getInstallments()) {
             System.out.println(i);

@@ -10,7 +10,7 @@ public class Contract {
     private Integer number;
     private LocalDate contractDate;
     private Double contractValue;
-    private List<Installment> installments = new ArrayList<>();
+    private final List<Installment> installments = new ArrayList<>();
 
     public Contract() {
     }
