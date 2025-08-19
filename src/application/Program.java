@@ -35,13 +35,9 @@ public class Program {
         ContractService service = new ContractService(new PaypalService());
         service.processContract(contract, parcelas);
 
-        System.out.println(contract.getInstallments().get(0).getLocalDate());
-        System.out.println(contract.getInstallments().get(0).getAmount());
-        System.out.println(contract.getInstallments().get(1).getLocalDate());
-        System.out.println(contract.getInstallments().get(1).getAmount());
-        System.out.println(contract.getInstallments().get(2).getLocalDate());
-        System.out.println(contract.getInstallments().get(2).getAmount());
-
+        for (Installment i : contract.getInstallments()) {
+            System.out.println(i);
+        }
 
 
         sc.close();
