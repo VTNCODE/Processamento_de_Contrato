@@ -39,6 +39,7 @@ public class Program {
             System.out.println(i);
         }
 
+        System.out.println("Valor total a pagar: " + String.format("%.2f", contract.totalToPay()));
 
         sc.close();
 

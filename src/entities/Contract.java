@@ -49,4 +49,12 @@ public class Contract {
         return installments;
     }
 
+    public double totalToPay() {
+        double total = 0;
+        for (Installment i : getInstallments()) {
+            total += i.getAmount();
+        }
+        return total;
+    }
+
 }
