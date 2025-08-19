@@ -18,7 +18,7 @@ public class ContractService {
             double amountI = paymentService.interest(value, i);
             double amountF = paymentService.paymentFee(value + amountI);
             double totalValue = value + amountI + amountF;
-            contract.getInstallments().add(new Installment(contract.getContractDate().plusMonths(i-1), totalValue));
+            contract.getInstallments().add(new Installment(contract.getContractDate().plusMonths(i), totalValue));
 
         }
     }
