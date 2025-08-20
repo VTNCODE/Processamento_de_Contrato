@@ -6,6 +6,9 @@ import services.PaypalService;
 import entities.Contract;
 import entities.Installment;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -16,8 +19,11 @@ public class Program {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
+        String path = "c:\\temp\\exercicios_em_java_\\processamentoDeContrato\\registrosParcelados";
+        String textPath ="c:\\temp\\exercicios_em_java_\\processamentoDeContrato\\registrosParcelados\\contratoComParcelas.txt";
+        File file = new File(path);
+        boolean fileCreated = file.mkdirs();
+        
         System.out.println("Entre os dados do contrato: ");
         System.out.print("Numero: ");
         int number = sc.nextInt();
@@ -30,16 +36,37 @@ public class Program {
         int installments = sc.nextInt();
         System.out.println();
 
-        System.out.println("Parcelas: ");
-
         ContractService service = new ContractService(new PaypalService());
         service.processContract(contract, installments);
 
-        for (Installment i : contract.getInstallments()) {
-            System.out.println(i);
+        try (BufferedWriter bf = new BufferedWriter(new FileWriter(textPath, true))){
+            bf.write(contract.toString());
+            bf.newLine();
+            System.out.println(contract);
+            System.out.println("Parcelas: ");
+            for (Installment i : contract.getInstallments()) {
+                bf.write(i.toString());
+                bf.newLine();
+                System.out.println(i);
+            }
+            bf.newLine();
+            bf.write("Valor ao final do contrato: " + contract.totalToPay());
+            bf.newLine();
+            bf.newLine();
         }
+        catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }
+        System.out.println();
+        System.out.println("Valor total a pagar ao final do contrato: " + String.format("%.2f", contract.totalToPay()));
+        System.out.println();
 
-        System.out.println("Valor total a pagar: " + String.format("%.2f", contract.totalToPay()));
+        if (fileCreated) {
+            System.out.println();
+        }
+        else {
+            System.out.println("Programa encerrado.");
+        }
 
         sc.close();
 
