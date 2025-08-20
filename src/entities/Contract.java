@@ -2,10 +2,13 @@ package entities;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Contract {
+
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private Integer number;
     private LocalDate contractDate;
@@ -47,6 +50,14 @@ public class Contract {
 
     public List<Installment> getInstallments() {
         return installments;
+    }
+
+    @Override
+    public String toString() {
+        return "Contrato: " + "\n" + "\n" +
+                "Número: " + number + "\n" +
+                "Data do contrato: " + contractDate.format(fmt) + "\n" +
+                "Valor do contrato: " + String.format("%.2f", contractValue) + "\n";
     }
 
     public double totalToPay() {
